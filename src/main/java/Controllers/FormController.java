@@ -5,16 +5,34 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
 
-//this annotation denotes it as a spring boot controller, allowing it to interact with the application
+
 @Controller
 public class FormController {
 
-    //This is an example of the part you use to map code to a html page
+    static String username;
+    static Integer age;
+
     @GetMapping(value = {"/submitForm"})
     protected String processForm(Model model,
                                  @RequestParam String name,
                                  @RequestParam Integer phoneNumber,
                                  @RequestParam LocalDate dob) throws Exception {
+
+        model.addAttribute("name", name);
+        model.addAttribute("phoneNumber", phoneNumber);
+        model.addAttribute("dob", dob);
+
+        Getage(dob);
+        customusername(dob, name);
+        model.addAttribute("username", username);
+        model.addAttribute("age", age);
+
+
+
+        return "submitForm";
+    }
+
+    public String customusername(LocalDate dob, String name) {
 
         String namePart = name.length() >= 4 ? name.substring(0, 4) : name;
 
@@ -22,15 +40,14 @@ public class FormController {
 
         String username = namePart + yearPart;
 
-        model.addAttribute("name", name);
-        model.addAttribute("phoneNumber", phoneNumber);
-        model.addAttribute("dob", dob);
-        model.addAttribute("username", username); // Add the new username
-
-        return "submitForm";
+        return username;
     }
 
+    public Integer Getage(LocalDate dob) {
+        LocalDate today = LocalDate.now();
 
+        return today.compareTo(dob);
+    }
 }
 
-}
+
