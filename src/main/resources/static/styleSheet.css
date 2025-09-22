@@ -1,0 +1,71 @@
+body{
+    background-color: rgb(255 94 0 / 59%);
+}
+
+
+p{
+    justify-content: center;
+    display: flex;
+    flex-wrap: nowrap;
+    font-size: xx-large;
+    font-family: Segoe UI;
+}
+#nameInput{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    font-family: "Segoe UI";
+}
+
+#phoneNumberInput{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    font-family: Segoe UI;
+}
+
+#dobInput{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    font-family: Segoe UI;
+}
+#submitInput{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
+#name{
+    font-size:large ;
+}
+#phoneNumber{
+    font-size: large;
+}
+#dob{
+    font-size: large;
+}
+
+#submit{
+    font-size: large;
+}
+
+
+
+label {
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap;
+    color: black;
+    font-size: xx-large;
+}
