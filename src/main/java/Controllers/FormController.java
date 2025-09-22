@@ -16,11 +16,11 @@ public class FormController {
                                  @RequestParam Integer phoneNumber,
                                  @RequestParam LocalDate dob) throws Exception {
 
-        String Name = name.length() >= 4 ? name.substring(0, 4) : name;
+        String namePart = name.length() >= 4 ? name.substring(0, 4) : name;
 
-        String Year = String.valueOf(dob.getYear()).substring(2);
+        String yearPart = String.valueOf(dob.getYear()).substring(2);
 
-        String username = Name + Year;
+        String username = namePart + yearPart;
 
         model.addAttribute("name", name);
         model.addAttribute("phoneNumber", phoneNumber);
