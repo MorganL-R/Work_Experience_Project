@@ -14,7 +14,7 @@ public class FormController {
     static String username;
     static Integer age;
 
-    @GetMapping(value = {"/submitForm"})
+    @GetMapping(value = {"/form"})
     protected String processForm(Model model,
                                  @RequestParam String name,
                                  @RequestParam String phoneNumber,
@@ -35,7 +35,7 @@ public class FormController {
             model.addAttribute("age", age);
 
 
-            return "submitForm";
+            return "/accepted";
 
         } catch (ResponseStatusException e) {
             throw e;
