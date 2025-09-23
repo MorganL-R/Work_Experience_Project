@@ -2,6 +2,7 @@ body{
     background-color: rgb(255 94 0 / 40%);
 }
 
+
 p{
     justify-content: center;
     display: flex;
@@ -47,9 +48,9 @@ p{
     font-size: large;
 }
 
-/*#SuperSecretlink{
+#SuperSecretlink{
     opacity: 0%;
-}*/
+}
 
 #name{
     font-size:large ;
@@ -64,6 +65,8 @@ p{
 #submit{
     font-size: large;
 }
+
+
 
 label {
     display: flex;
