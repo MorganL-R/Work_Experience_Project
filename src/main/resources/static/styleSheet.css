@@ -1,5 +1,5 @@
 body{
-    background-color: rgb(255 94 0 / 59%);
+    background-color: rgb(255 94 0 / 40%);
 }
 
 
@@ -8,7 +8,7 @@ p{
     display: flex;
     flex-wrap: nowrap;
     font-size: xx-large;
-    font-family: Segoe UI;
+    font-family: Segoe UI, cursive;
 }
 #nameInput{
     display: flex;
@@ -16,7 +16,8 @@ p{
     flex-wrap: wrap;
     flex-direction: column;
     align-items: center;
-    font-family: "Segoe UI";
+    font-family: "Segoe UI", serif;
+    font-size: large;
 }
 
 #phoneNumberInput{
@@ -25,7 +26,8 @@ p{
     flex-wrap: wrap;
     flex-direction: column;
     align-items: center;
-    font-family: Segoe UI;
+    font-family: Segoe UI,sans-serif;
+    font-size: large;
 }
 
 #dobInput{
@@ -35,6 +37,7 @@ p{
     flex-direction: column;
     align-items: center;
     font-family: Segoe UI;
+    font-size: large;
 }
 #submitInput{
     display: flex;
@@ -42,6 +45,7 @@ p{
     flex-wrap: wrap;
     flex-direction: column;
     align-items: center;
+    font-size: large;
 }
 
 
@@ -67,5 +71,5 @@ label {
     justify-content: center;
     flex-wrap: nowrap;
     color: black;
-    font-size: xx-large;
+    font-size: x-large;
 }
