@@ -14,7 +14,7 @@ public class FormController {
     static String username;
     static Integer age;
 
-    @GetMapping(value = {"/submitForm"})
+    @GetMapping(value = {"/accepted"})
     protected String processForm(Model model,
                                  @RequestParam String name,
                                  @RequestParam Integer phoneNumber,
@@ -30,7 +30,7 @@ public class FormController {
         model.addAttribute("age", age);
 
 
-        return "submitForm";
+        return "accepted";
     }
 
     public String customusername(LocalDate dob, String name) {
