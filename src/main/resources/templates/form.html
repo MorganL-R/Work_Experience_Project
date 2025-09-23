@@ -9,7 +9,7 @@
 
 <body>
 
-    <form action="/submitForm" method="POST">
+    <form action="../templates/accepted.html" method="POST">
         <br>
         <div id="nameInput">
 
@@ -20,8 +20,8 @@
                     id="name"
                     name="name"
                     required
-                    minlength="4"
-                    maxlength="8"
+                    minlength="2"
+                    maxlength="100"
                     size="10" />
         </div>
         <br>
@@ -34,7 +34,7 @@
                     id="phoneNumber"
                     name="phoneNumber"
                     required
-                    minlength="11"
+                    minlength="10"
                     maxlength="15"
                     size="10" />
         </div>
@@ -51,6 +51,7 @@
         <div id="submitInput">
             <input type="submit" value="Send Request" />
         </div>
+        <a id="SuperSecretlink" href="accepted.html">super duper secret link nobody will ever find</a>
     </form>
 
 </body>

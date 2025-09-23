@@ -59,7 +59,7 @@ public class FormController {
 
         if (!phoneNumber.matches("[0-9]*")) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Phone number must only contain digits");
-        } else if (phoneNumber.length() > 10) {
+        } else if (phoneNumber.length() > 16) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Phone number can not contain more than 10 characters");
         } else if (phoneNumber.length() < 9) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Phone number must contain ta least 9 characters");
