@@ -15,10 +15,11 @@ public class FormController {
     static String username;
     static Integer age;
 
-    @GetMapping(value = {"/openForm"})
+    @GetMapping(value = {"/form"})
     protected String openForm(){
         return "/submitForm";
     }
+
     @PostMapping(value = {"/submitForm"})
     protected String processForm(Model model,
         @RequestParam String name,
