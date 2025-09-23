@@ -17,26 +17,35 @@ public class FormController {
     @GetMapping(value = {"/submitForm"})
     protected String processForm(Model model,
                                  @RequestParam String name,
-                                 @RequestParam Integer phoneNumber,
-                                 @RequestParam LocalDate dob) throws Exception {
+                                 @RequestParam String phoneNumber,
+                                 @RequestParam LocalDate dob) throws ResponseStatusException {
 
-        model.addAttribute("name", name);
-        model.addAttribute("phoneNumber", phoneNumber);
-        model.addAttribute("dob", dob);
+        try {
+            // Ensure inputs are valid
+            exceptionHandling(name, phoneNumber, dob);
 
-        Getage(dob);
-        customusername(dob, name);
-        model.addAttribute("username", username);
-        model.addAttribute("age", age);
+            // Add attributes to model
+            model.addAttribute("name", name);
+            model.addAttribute("phoneNumber", phoneNumber);
+            model.addAttribute("dob", dob);
+
+            Getage(dob);
+            customusername(dob, name);
+            model.addAttribute("username", username);
+            model.addAttribute("age", age);
 
 
-        return "submitForm";
+            return "submitForm";
+
+        } catch (ResponseStatusException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+        }
     }
 
     public String customusername(LocalDate dob, String name) {
-
         String namePart = name.length() >= 4 ? name.substring(0, 4) : name;
-
         String yearPart = String.valueOf(dob.getYear()).substring(2);
 
         String username = namePart + yearPart;
