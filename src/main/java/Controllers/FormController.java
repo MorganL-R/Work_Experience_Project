@@ -31,17 +31,19 @@ public class FormController {
         return "submitForm";
     }
 
-    public void exceptionHandling(String name, Integer phoneNumber, LocalDate dob) throws ResponseStatusException {
+    public void exceptionHandling(String name, String phoneNumber, LocalDate dob) throws ResponseStatusException {
         if (name.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Name can not be empty");
         } else if (name.length() > 100) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Name contains too many characters");
         }
 
-        if (phoneNumber.toString().length() > 10) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Phone number contains too many characters");
-        } else if (phoneNumber.toString().length() < 9) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Phone number doesn't contain enough characters");
+        if (!phoneNumber.matches("[0-9]*")) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Phone number must only contain digits");
+        } else if (phoneNumber.length() > 10) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Phone number can not contain more than 10 characters");
+        } else if (phoneNumber.length() < 9) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Phone number must contain ta least 9 characters");
         }
 
         if (!dob.isBefore(LocalDate.now())) {
