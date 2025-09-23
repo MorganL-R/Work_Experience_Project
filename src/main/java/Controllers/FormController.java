@@ -1,10 +1,12 @@
+package Controllers;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.web.server.ResponseStatusException;
 import java.time.LocalDate;
-
 
 @Controller
 public class FormController {
@@ -28,7 +30,6 @@ public class FormController {
         model.addAttribute("age", age);
 
 
-
         return "submitForm";
     }
 
@@ -48,6 +49,24 @@ public class FormController {
 
         return today.compareTo(dob);
     }
+
+    public void exceptionHandling(String name, String phoneNumber, LocalDate dob) throws ResponseStatusException {
+        if (name.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Name can not be empty");
+        } else if (name.length() > 100) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Name contains too many characters");
+        }
+
+        if (!phoneNumber.matches("[0-9]*")) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Phone number must only contain digits");
+        } else if (phoneNumber.length() > 10) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Phone number can not contain more than 10 characters");
+        } else if (phoneNumber.length() < 9) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Phone number must contain ta least 9 characters");
+        }
+
+        if (!dob.isBefore(LocalDate.now())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Date of birth must be in the past");
+        }
+    }
 }
-
-
