@@ -1,4 +1,4 @@
-package Controllers;
+package com.example.Work_Experience_Project.controllers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import java.time.LocalDate;
 import org.springframework.web.server.ResponseStatusException;
-import java.time.LocalDate;
 
 @Controller
 public class FormController {
@@ -17,9 +16,9 @@ public class FormController {
 
     @GetMapping(value = {"/submitForm"})
     protected String processForm(Model model,
-                                 @RequestParam String name,
-                                 @RequestParam Integer phoneNumber,
-                                 @RequestParam LocalDate dob) throws Exception {
+        @RequestParam String name,
+        @RequestParam Integer phoneNumber,
+        @RequestParam LocalDate dob) throws Exception {
 
         model.addAttribute("name", name);
         model.addAttribute("phoneNumber", phoneNumber);
@@ -48,7 +47,7 @@ public class FormController {
 
         return today.compareTo(dob);
     }
-}
+
 
     public void exceptionHandling(String name, String phoneNumber, LocalDate dob) throws ResponseStatusException {
         if (name.isEmpty()) {
@@ -60,9 +59,11 @@ public class FormController {
         if (!phoneNumber.matches("[0-9]*")) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Phone number must only contain digits");
         } else if (phoneNumber.length() > 16) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Phone number can not contain more than 10 characters");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                "Phone number can not contain more than 10 characters");
         } else if (phoneNumber.length() < 9) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Phone number must contain ta least 9 characters");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                "Phone number must contain ta least 9 characters");
         }
 
         if (!dob.isBefore(LocalDate.now())) {
