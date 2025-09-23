@@ -30,25 +30,25 @@ public class FormController {
         model.addAttribute("phoneNumber", phoneNumber);
         model.addAttribute("dob", dob);
 
-        Getage(dob);
-        customusername(dob, name);
+        getAge(dob);
+        customUsername(dob, name);
         model.addAttribute("username", username);
         model.addAttribute("age", age);
         return "/accepted";
     }
 
-    public String customusername(LocalDate dob, String name) {
+    public String customUsername(LocalDate dob, String name) {
 
         String namePart = name.length() >= 4 ? name.substring(0, 4) : name;
 
         String yearPart = String.valueOf(dob.getYear()).substring(2);
 
-        String username = namePart + yearPart;
+        username = namePart + yearPart;
 
         return username;
     }
 
-    public Integer Getage(LocalDate dob) {
+    public Integer getAge(LocalDate dob) {
         LocalDate today = LocalDate.now();
 
         return today.compareTo(dob);
