@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import java.time.LocalDate;
 import org.springframework.web.server.ResponseStatusException;
@@ -14,7 +15,11 @@ public class FormController {
     static String username;
     static Integer age;
 
-    @GetMapping(value = {"/submitForm"})
+    @GetMapping(value = {"/openForm"})
+    protected String openForm(){
+        return "/submitForm";
+    }
+    @PostMapping(value = {"/submitForm"})
     protected String processForm(Model model,
         @RequestParam String name,
         @RequestParam Integer phoneNumber,
@@ -28,7 +33,7 @@ public class FormController {
         customusername(dob, name);
         model.addAttribute("username", username);
         model.addAttribute("age", age);
-        return "submitForm";
+        return "/accepted";
     }
 
     public String customusername(LocalDate dob, String name) {
