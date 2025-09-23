@@ -1,34 +1,53 @@
 package Controllers;
 
-import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.boot.actuate.autoconfigure.observation.ObservationProperties;
-import org.springframework.http.HttpMessage;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.Mapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
-
-import java.net.http.HttpResponse;
 import java.time.LocalDate;
 
-//this annotation denotes it as a spring boot controller, allowing it to interact with the application
 @Controller
 public class FormController {
 
-    private final HttpServletResponse httpServletResponse;
+    static String username;
+    static Integer age;
 
-    public FormController(HttpServletResponse httpServletResponse) {
-        this.httpServletResponse = httpServletResponse;
+    @GetMapping(value = {"/submitForm"})
+    protected String processForm(Model model,
+                                 @RequestParam String name,
+                                 @RequestParam Integer phoneNumber,
+                                 @RequestParam LocalDate dob) throws Exception {
+
+        model.addAttribute("name", name);
+        model.addAttribute("phoneNumber", phoneNumber);
+        model.addAttribute("dob", dob);
+
+        Getage(dob);
+        customusername(dob, name);
+        model.addAttribute("username", username);
+        model.addAttribute("age", age);
+
+
+        return "submitForm";
     }
 
-    //This is an example of the part you use to map code to a html page
-    @GetMapping(value = {"/submitForm"})
-    protected String defaultRoute(HttpMethod httpMethod) throws Exception {
-        //code here, the return value tells the program which page to go to next
-        return "submitForm";
+    public String customusername(LocalDate dob, String name) {
+
+        String namePart = name.length() >= 4 ? name.substring(0, 4) : name;
+
+        String yearPart = String.valueOf(dob.getYear()).substring(2);
+
+        String username = namePart + yearPart;
+
+        return username;
+    }
+
+    public Integer Getage(LocalDate dob) {
+        LocalDate today = LocalDate.now();
+
+        return today.compareTo(dob);
     }
 
     public void exceptionHandling(String name, String phoneNumber, LocalDate dob) throws ResponseStatusException {
@@ -51,10 +70,3 @@ public class FormController {
         }
     }
 }
-
-
-
-
-
-
-
