@@ -16,6 +16,11 @@ span.response-display {
     color: #0f7070;
 }
 
+span.error-display {
+    margin-left: 15px;
+    color: #af1313;
+}
+
 #nameInput{
     display: flex;
     justify-content: center;
