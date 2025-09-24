@@ -29,7 +29,7 @@ public class FormController {
         try {
             exceptionHandling(name, phoneNumber, dob);
 
-            Getage(dob);
+            getAge(dob);
             customusername(dob, name);
 
             model.addAttribute("name", name);
@@ -53,10 +53,14 @@ public class FormController {
         username = namePart + yearPart;
     }
 
-    public void Getage(LocalDate dob) {
+    public void getAge(LocalDate dob) {
         LocalDate today = LocalDate.now();
 
-        age = today.getYear() - dob.getYear();
+        if (today.getYear() == dob.getYear()) {
+            age = 0;
+        } else {
+            age = today.compareTo(dob);
+        }
     }
 
 
