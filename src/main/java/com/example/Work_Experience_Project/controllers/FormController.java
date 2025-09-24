@@ -24,32 +24,39 @@ public class FormController {
     protected String processForm(Model model,
         @RequestParam String name,
         @RequestParam String phoneNumber,
-        @RequestParam LocalDate dob) throws Exception {
+        @RequestParam LocalDate dob) throws ResponseStatusException {
 
-        model.addAttribute("name", name);
-        model.addAttribute("phoneNumber", phoneNumber);
-        model.addAttribute("dob", dob);
+        try {
+            exceptionHandling(name, phoneNumber, dob);
 
-        Getage(dob);
-        customusername(dob, name);
-        model.addAttribute("username", username);
-        model.addAttribute("age", age);
-        return "/accepted";
+            Getage(dob);
+            customusername(dob, name);
+
+            model.addAttribute("name", name);
+            model.addAttribute("phoneNumber", phoneNumber);
+            model.addAttribute("dob", dob);
+
+            model.addAttribute("username", username);
+            model.addAttribute("age", age);
+            return "/accepted";
+        } catch (ResponseStatusException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+        }
     }
 
     public void customusername(LocalDate dob, String name) {
-
         String namePart = name.length() >= 4 ? name.substring(0, 4) : name;
-
         String yearPart = String.valueOf(dob.getYear()).substring(2);
 
         username = namePart + yearPart;
     }
 
-    public Integer Getage(LocalDate dob) {
+    public void Getage(LocalDate dob) {
         LocalDate today = LocalDate.now();
 
-        return today.compareTo(dob);
+        age = today.getYear() - dob.getYear();
     }
 
 
@@ -62,7 +69,7 @@ public class FormController {
 
         if (!phoneNumber.matches("[0-9]*")) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Phone number must only contain digits");
-        } else if (phoneNumber.length() > 16) {
+        } else if (phoneNumber.length() > 15) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                 "Phone number can not contain more than 10 characters");
         } else if (phoneNumber.length() < 9) {

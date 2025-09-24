@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <link rel="stylesheet" href="css/styleSheet.css">
     <meta charset="UTF-8">
@@ -6,25 +7,24 @@
     <p> Accepted </p>
 </head>
 
-
 <body>
 
 <form action="/accepted" method="POST">
     <div>
         <p>
-            Name:
-
+            Username:&nbsp;<span class="response-display" th:text=${username}></span>
         </p>
         <p>
-            Age:
+            Age:&nbsp;<span class="response-display" th:text=${age}></span>
         </p>
         <p>
-            Birthday:
+            Birthday:&nbsp;<span class="response-display" th:text=${dob}></span>
         </p>
         <p>
-            Phone Number:
+            Phone Number:&nbsp;<span class="response-display" th:text=${phoneNumber}></span>
         </p>
     </div>
 </form>
 
 </body>
+</html>
