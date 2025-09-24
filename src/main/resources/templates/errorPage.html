@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" href="css/styleSheet.css">
+    <meta charset="UTF-8">
+    <title>Error</title>
+    <p> Error </p>
+</head>
+
+<body>
+
+<form action="/errorPage" method="POST">
+    <div>
+        <H1 th:text="${status}"/>
+        <p th:text="${message}"/>
+    </div>
+</form>
+
+</body>
+</html>
