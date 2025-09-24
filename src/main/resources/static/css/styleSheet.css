@@ -22,7 +22,7 @@ span.response-display {
     flex-wrap: wrap;
     flex-direction: column;
     align-items: center;
-    font-family: "Segoe UI", serif;
+    font-family: "Segoe UI", sans-serif;
     font-size: large;
 }
 
@@ -42,7 +42,7 @@ span.response-display {
     flex-wrap: wrap;
     flex-direction: column;
     align-items: center;
-    font-family: Segoe UI;
+    font-family: Segoe UI, sans-serif;
     font-size: large;
 }
 #submitInput{
@@ -78,4 +78,5 @@ label {
     flex-wrap: nowrap;
     color: black;
     font-size: x-large;
+
 }
