@@ -11,9 +11,10 @@
 <form action="/errorPage" method="POST">
     <div id="error-container">
         <h1>
-            An Error has Occurred, error<span class="error-display" th:text=${status}></span>
+            Error&nbsp;<span class="error-display" th:text=${status}></span>:
         </h1>
         <p th:text="${message}"/>
+        <a id="backLink" href="/form">Back</a>
     </div>
 </form>
 
