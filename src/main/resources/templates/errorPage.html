@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" href="css/errorStyleSheet.css">
+    <meta charset="UTF-8">
+    <title>An Error Occurred</title>
+</head>
+
+<body>
+
+<form action="/errorPage" method="POST">
+    <div id="error-container">
+        <h1>
+            An Error has Occurred, error<span class="error-display" th:text=${status}></span>
+        </h1>
+        <p th:text="${message}"/>
+    </div>
+</form>
+
+</body>
+</html>
