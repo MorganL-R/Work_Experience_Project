@@ -1,0 +1,35 @@
+body{
+    background-color: rgb(255 94 0 / 40%);
+}
+
+body {
+    font-family: Segoe UI, cursive;
+}
+
+p{
+    justify-content: center;
+    display: flex;
+    flex-wrap: nowrap;
+    font-size: x-large;
+}
+
+#error-container {
+    display: block;
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 30px;
+    background-color: rgba(100%, 100%, 100%, 40%);
+    padding: 40px;
+    border-radius: 10px;
+}
+
+span.error-display {
+    margin-left: 10px;
+    color: #af1313;
+}
+
+h1 {
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap;
+}
