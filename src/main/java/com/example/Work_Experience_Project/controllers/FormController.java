@@ -23,7 +23,7 @@ public class FormController {
     @PostMapping(value = {"/submitForm"})
     protected String processForm(Model model,
         @RequestParam String name,
-        @RequestParam Integer phoneNumber,
+        @RequestParam String phoneNumber,
         @RequestParam LocalDate dob) throws Exception {
 
         model.addAttribute("name", name);
@@ -37,7 +37,7 @@ public class FormController {
         return "/accepted";
     }
 
-    public String customUsername(LocalDate dob, String name) {
+    public String customusername(LocalDate dob, String name) {
 
         String namePart = name.length() >= 4 ? name.substring(0, 4) : name;
 
