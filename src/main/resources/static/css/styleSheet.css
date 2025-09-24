@@ -10,6 +10,12 @@ p{
     font-size: xx-large;
     font-family: Segoe UI, cursive;
 }
+
+span.response-display {
+    margin-left: 35px;
+    color: #0f7070;
+}
+
 #nameInput{
     display: flex;
     justify-content: center;
@@ -48,9 +54,7 @@ p{
     font-size: large;
 }
 
-#SuperSecretlink{
-    opacity: 0%;
-}
+
 
 #name{
     font-size:large ;
