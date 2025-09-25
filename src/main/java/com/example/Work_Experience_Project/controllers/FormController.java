@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import org.springframework.web.server.ResponseStatusException;
 
 @Controller
@@ -34,7 +36,7 @@ public class FormController {
 
             model.addAttribute("name", name);
             model.addAttribute("phoneNumber", phoneNumber);
-            model.addAttribute("dob", dob);
+            model.addAttribute("dob", dob.format(DateTimeFormatter.ofPattern("dd / MM / yyyy")));
 
             model.addAttribute("username", username);
             model.addAttribute("age", age);
