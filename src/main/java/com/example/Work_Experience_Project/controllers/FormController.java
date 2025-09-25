@@ -66,23 +66,23 @@ public class FormController {
 
     public void exceptionHandling(String name, String phoneNumber, LocalDate dob) throws ResponseStatusException {
         if (name.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Name can not be empty");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Name can not be empty");
         }  else if (name.length() > 40) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Name contains too many characters");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Name contains too many characters");
         }
 
         if (!phoneNumber.matches("[0-9 ]*")) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Phone number must only contain digits and spaces");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Phone number must only contain digits and spaces");
         } else if (phoneNumber.length() > 15) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Phone number can not contain more than 15 characters");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Phone number can not contain more than 15 characters");
         } else if (phoneNumber.length() < 9) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Phone number must contain at least 9 characters");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Phone number must contain at least 9 characters");
         }
 
         if (!dob.isBefore(LocalDate.now())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Date of birth must be in the past");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Date of birth must be in the past");
         } else if (dob.isBefore(LocalDate.parse("1900-01-01"))) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Date of birth must be later than 01/01/1900");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Date of birth must be later than 01/01/1900");
         }
     }
 }
