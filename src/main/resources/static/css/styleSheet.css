@@ -49,6 +49,9 @@ input[type=date]:hover {
     background-color: rgba(147, 147, 147, 0.49);
 
 }
+input[type=submit]:hover{
+    background-color: rgba(76, 175, 80, 0.68);
+}
 
 p{
     color: black;
@@ -132,4 +135,27 @@ group{
     color: black;
     font-size: x-large;
 
+}
+a{
+    text-decoration: none;
+    display: inline-block;
+    padding: 8px 16px;
+}
+
+a:hover {
+    background-color: rgb(19 84 143 / 60%);
+    color: #ffffff;
+
+}
+
+.previous {
+    background-color: rgba(120, 120, 120, 0.48);
+    color: #000000;
+}
+
+#dateformat{
+    font-size: x-large;
+    color: #00000087;
+    justify-content: center;
+    display: flex;
 }
