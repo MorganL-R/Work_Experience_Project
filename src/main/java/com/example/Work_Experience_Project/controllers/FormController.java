@@ -66,23 +66,23 @@ public class FormController {
 
     public void exceptionHandling(String name, String phoneNumber, LocalDate dob) throws ResponseStatusException {
         if (name.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Name can not be empty");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Name can not be empty");
         } else if (name.length() > 100) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Name contains too many characters");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Name contains too many characters");
         }
 
         if (!phoneNumber.matches("[0-9]*")) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Phone number must only contain digits");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Phone number must only contain digits");
         } else if (phoneNumber.length() > 15) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
                 "Phone number can not contain more than 10 characters");
         } else if (phoneNumber.length() < 9) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
                 "Phone number must contain ta least 9 characters");
         }
 
         if (!dob.isBefore(LocalDate.now())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Date of birth must be in the past");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Date of birth must be in the past");
         }
     }
 }
