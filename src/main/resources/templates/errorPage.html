@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <link rel="stylesheet" href="css/errorStyleSheet.css">
-    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>An Error Occurred</title>
 </head>
 
@@ -14,7 +14,9 @@
             Error&nbsp;<span class="error-display" th:text=${status}></span>:
         </h1>
         <p th:text="${message}"/>
-        <a id="backLink" href="/form">Back</a>
+
+
+        <a href="/form" class="previous">&laquo; Previous</a>
     </div>
 </form>
 
