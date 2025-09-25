@@ -125,7 +125,7 @@ span.error-display {
 
 
 
-label {
+group{
     display: flex;
     justify-content: center;
     flex-wrap: nowrap;
