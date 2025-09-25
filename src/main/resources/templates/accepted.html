@@ -18,12 +18,16 @@
             Age:&nbsp;<span class="response-display" th:text=${age}></span>
         </p>
         <p>
-            Birthday:&nbsp;<span class="response-display" th:text=${dob}></span>
+            Birthday:&nbsp;
+            <span>
+                <span class="response-display" th:text=${dob}></span>
+                <span id="dateformat" >(dd/mm/yyyy) </span>
+            </span>
         </p>
         <p>
             Phone Number:&nbsp;<span class="response-display" th:text=${phoneNumber}></span>
         </p>
-        <a id="backLink" href="/form">Back</a>
+        <a href="/form" class="previous">&laquo; Previous</a>
     </div>
 </form>
 

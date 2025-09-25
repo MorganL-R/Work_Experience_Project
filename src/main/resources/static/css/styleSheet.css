@@ -136,3 +136,26 @@ group{
     font-size: x-large;
 
 }
+a{
+    text-decoration: none;
+    display: inline-block;
+    padding: 8px 16px;
+}
+
+a:hover {
+    background-color: rgb(19 84 143 / 60%);
+    color: #ffffff;
+
+}
+
+.previous {
+    background-color: rgba(120, 120, 120, 0.48);
+    color: #000000;
+}
+
+#dateformat{
+    font-size: x-large;
+    color: #00000087;
+    justify-content: center;
+    display: flex;
+}
