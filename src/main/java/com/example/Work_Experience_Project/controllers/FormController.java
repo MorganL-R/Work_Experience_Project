@@ -1,5 +1,7 @@
 package com.example.Work_Experience_Project.controllers;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +16,7 @@ import org.springframework.web.server.ResponseStatusException;
 @Controller
 public class FormController {
 
+    private static final Log log = LogFactory.getLog(FormController.class);
     static String username;
     static Integer age;
 
@@ -40,6 +43,7 @@ public class FormController {
 
             model.addAttribute("username", username);
             model.addAttribute("age", age);
+            log.info("Request successfully processed");
             return "/accepted";
         } catch (ResponseStatusException e) {
             throw e;
