@@ -49,6 +49,9 @@ input[type=date]:hover {
     background-color: rgba(147, 147, 147, 0.49);
 
 }
+input[type=submit]:hover{
+    background-color: rgba(76, 175, 80, 0.68);
+}
 
 p{
     color: black;
