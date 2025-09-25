@@ -1,5 +1,6 @@
 body{
-    background-color: rgb(255 94 0 / 40%);
+    background-color: rgba(122, 140, 142, 0.6);
+
 }
 
 body {
@@ -33,3 +34,21 @@ h1 {
     justify-content: center;
     flex-wrap: nowrap;
 }
+
+ a{
+    text-decoration: none;
+    display: inline-block;
+    padding: 8px 16px;
+}
+
+a:hover {
+    background-color: rgb(19 84 143 / 60%);
+    color: #ffffff;
+
+}
+
+.previous {
+    background-color: rgba(120, 120, 120, 0.48);
+    color: #000000;
+}
+
