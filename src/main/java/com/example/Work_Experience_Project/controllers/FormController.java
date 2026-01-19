@@ -46,9 +46,12 @@ public class FormController {
 
             model.addAttribute("username", username);
             model.addAttribute("age", age);
-            log.info("Request successfully processed\nRequest Output:\n Name: " + name + "\n age: " + age + "\n Date "
-                + "of Birth: " + dob.format(DateTimeFormatter.ofPattern("dd/MM" + "/yyyy")) + "\n Phone "
-                + "Number: " + phoneNumber + "\n Generated Username: " + username);
+            log.info("Request successfully processed"
+                + "\n Request Output:"
+                + "\n   Name: " + name
+                + "\n   age: " + age
+                + "\n   Date of Birth: " + dob.format(DateTimeFormatter.ofPattern("dd/MM" + "/yyyy"))
+                + "\n   Phone Number: " + phoneNumber + "\n  Generated Username: " + username);
             return "/accepted";
         } catch (ResponseStatusException e) {
             throw e;
