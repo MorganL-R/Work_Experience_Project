@@ -37,9 +37,11 @@ public class FormController {
             getAge(dob);
             customusername(dob, name);
 
+
             model.addAttribute("name", name);
+            model.addAttribute("age", age);
+            model.addAttribute("dob", dob.format(DateTimeFormatter.ofPattern("dd / MM " + "/ yyyy")));
             model.addAttribute("phoneNumber", phoneNumber);
-            model.addAttribute("dob", dob.format(DateTimeFormatter.ofPattern("dd / MM / yyyy")));
 
             model.addAttribute("username", username);
             model.addAttribute("age", age);
