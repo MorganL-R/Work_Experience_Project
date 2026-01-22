@@ -15,15 +15,6 @@ class WorkExperienceProjectApplicationTests {
   @Autowired
   private MockMvc mockMvc;
 
-    /*@Test
-    void happyPath() throws Exception {
-        mockMvc.perform(post("/submitForm")
-                        .param("name", "Kuba")
-                        .param("phoneNumber", "1234567890")
-                        .param("dob", "2007-12-21"))
-                .andExpect(status().is(200));
-    }*/
-
   @Test
   void happyPathReturns200Response() throws Exception {
     mockMvc.perform(post("/submitForm")
