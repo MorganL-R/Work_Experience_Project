@@ -12,61 +12,73 @@ import org.springframework.test.web.servlet.MockMvc;
 @WebMvcTest(FormController.class)
 class WorkExperienceProjectApplicationTests {
 
-    @Autowired
-    private MockMvc mockMvc;
+  @Autowired
+  private MockMvc mockMvc;
 
-//    Kuba
-
-    @Test
+    /*@Test
     void happyPath() throws Exception {
         mockMvc.perform(post("/submitForm")
                         .param("name", "Kuba")
                         .param("phoneNumber", "1234567890")
                         .param("dob", "2007-12-21"))
                 .andExpect(status().is(200));
-    }
+    }*/
 
-//    Stan
+  @Test
+  void happyPathReturns200Response() throws Exception {
+    mockMvc.perform(post("/submitForm")
+        .param("name", "Joshua")
+        .param("phoneNumber", "1234567890")
+        .param("dob", "2008-11-13")).andExpect(status().is(200));
 
-    @Test
-    void NullValue() throws Exception {
-        mockMvc.perform(post("/submitForm")
-                        .param("name", "")
-                        .param("phoneNumber", "1234567890")
-                        .param("dob", "2000-01-01"))
-                .andExpect(status().is(500));
-    }
+  }
+// Test for if name is 1 character
+  @Test
+  void nameTooShortTriggerTest() throws Exception {
+    mockMvc.perform(post("/submitForm")
+        .param("name", "J")
+        .param("phoneNumber", "1234567890")
+        .param("dob", "2008-11-13")).andExpect(status().is(500));
+  }
+// Test for name longer than 15 characters
+  @Test
+  void nameTooLongTriggerTest() throws Exception {
+    mockMvc.perform(post("/submitForm")
+        .param("name", "JJJJJJJJJJJJJJJJJJJ")
+        .param("phoneNumber", "1234567890")
+        .param("dob", "2008-11-13")).andExpect(status().is(500));
+  }
+// Test for if phone number is too long
+  @Test
+  void phoneNumberTooLongTriggerTest() throws Exception {
+    mockMvc.perform(post("/submitForm")
+        .param("name", "Josh")
+        .param("phoneNumber", "1565545454545465454545454465455454545455645454654545456455456454545456565")
+        .param("dob", "2008-11-13")).andExpect(status().is(500));
+  }
+// Test for if phone number is too short
+  @Test
+  void phoneNumberTooShortTriggerTest() throws Exception {
+    mockMvc.perform(post("/submitForm")
+        .param("name", "Josh")
+        .param("phoneNumber", "1")
+        .param("dob", "2008-11-13")).andExpect(status().is(500));
+  }
 
-//    Ryan
+  @Test
+  void dobUpperBoundExceptionTest() throws Exception{
+    mockMvc.perform(post("/submitForm")
+        .param("name", "Josh")
+        .param("phoneNumber", "1234567890")
+        .param("dob", "2077-11-13")).andExpect(status().is(500));
+  }
 
-    @Test
-    void dobOutOfRange() throws Exception {
-        mockMvc.perform(post("/submitForm")
-                        .param("name", "Ryan")
-                        .param("phoneNumber", "1234567890")
-                        .param("dob", "9999-01-01"))
-                .andExpect(status().is(500));
-    }
+  @Test
+  void dobLowerBoundExceptionTest() throws Exception{
+    mockMvc.perform(post("/submitForm")
+        .param("name", "Josh")
+        .param("phoneNumber", "1234567890")
+        .param("dob", "1425-11-13")).andExpect(status().is(500));
 
-//    Aidan
-
-    @Test
-    void phoneNumberIncorrectValue() throws Exception {
-        mockMvc.perform(post("/submitForm")
-                        .param("name", "Ryan")
-                        .param("phoneNumber", "123")
-                        .param("dob", "2000-01-01"))
-                .andExpect(status().is(500));
-    }
-
-//    Adam
-
-    @Test
-    void phoneNumberEmptyValue() throws Exception {
-        mockMvc.perform(post("/submitForm")
-                        .param("name", "Ryan")
-                        .param("phoneNumber", "")
-                        .param("dob", "2000-01-01"))
-                .andExpect(status().is(500));
-    }
+  }
 }
