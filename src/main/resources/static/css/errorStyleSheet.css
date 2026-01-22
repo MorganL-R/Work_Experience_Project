@@ -1,6 +1,5 @@
 body{
-    background-color: rgba(122, 140, 142, 0.6);
-
+    background-color: #1976c2;
 }
 
 body {
@@ -15,13 +14,11 @@ p{
 }
 
 #error-container {
-    display: block;
-    margin-left: 20%;
-    margin-right: 20%;
-    margin-top: 30px;
-    background-color: rgba(100%, 100%, 100%, 40%);
-    padding: 40px;
-    border-radius: 10px;
+    margin: auto;
+    border-radius: 25px;
+    background-color: #97c9f2;
+    padding: 20px;
+    width: 50%;
 }
 
 span.error-display {

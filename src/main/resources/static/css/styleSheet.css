@@ -1,12 +1,12 @@
 body{
-    background-color: rgba(122, 140, 142, 0.6);
+    background-color: #1976c2;
 }
 
 
 form {
     margin: auto;
-    border-radius: 5px;
-    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 25px;
+    background-color: #97c9f2;
     padding: 20px;
     width: 50%;
 }
@@ -54,7 +54,7 @@ input[type=submit]:hover{
 }
 
 p{
-    color: black;
+    color: #474747;
     justify-content: center;
     display: flex;
     flex-wrap: nowrap;
@@ -64,12 +64,16 @@ p{
 
 span.response-display {
     margin-left: 0px;
-    color: #0f7070;
+    color: black;
 }
 
 span.error-display {
     margin-left: 15px;
     color: #af1313;
+}
+
+span.dateformat {
+    color: #474747;
 }
 
 #nameInput{

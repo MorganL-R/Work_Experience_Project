@@ -1,7 +1,9 @@
 package com.example.Work_Experience_Project.controllers;
 
+import java.time.Period;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.cglib.core.Local;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -60,43 +62,64 @@ public class FormController {
         }
     }
 
-    public void customusername(LocalDate dob, String name) {
-        String namePart = name.length() >= 4 ? name.substring(0, 4) : name;
-        String yearPart = String.valueOf(dob.getYear()).substring(2);
-
-        username = namePart + yearPart;
-    }
+      public void customusername(LocalDate dob, String name){
+          String year = String.valueOf(dob.getYear());
+          String cutDownName;
+          String lastTwoDigits;
+          if(name.length() == 3){
+              cutDownName = name.substring(0,name.length());
+              lastTwoDigits = year.substring(year.length() - 3);
+          }else if(name.length() == 2){
+               cutDownName = name.substring(0, name.length());
+              lastTwoDigits = year.substring(year.length() -4);
+          }else{
+              cutDownName = name.substring(0, 4);
+              lastTwoDigits = year.substring(year.length() - 2);
+          }
+          username = cutDownName + lastTwoDigits;
+      }
 
     public void getAge(LocalDate dob) {
-        LocalDate today = LocalDate.now();
-
-        if (today.getYear() == dob.getYear()) {
-            age = 0;
-        } else {
-            age = today.compareTo(dob);
-        }
+        age = Period.between(dob, LocalDate.now()).getYears();
     }
 
-
     public void exceptionHandling(String name, String phoneNumber, LocalDate dob) throws ResponseStatusException {
-        if (name.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Name can not be empty");
-        }  else if (name.length() > 40) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Name contains too many characters");
+        // check
+        if(name.isEmpty()){
+            log.info("The username field is empty, please fill it and try again");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "The username field is empty, please "
+                + "fill it and try again");
+
+        }else if(name.length() > 15){
+            log.info("Name is too long, enter a name with less than 15 characters");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Name is too long, enter a name with "
+                + "less than 15 characters");
+
+        } else if (name.length() == 1){
+            log.info("Name is too short, enter a name with more than 2 characters");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Name is too short, enter a name with"
+                + " more than 2 characters");
+
+        }
+        if(phoneNumber.length() > 10){
+            log.info("phone number too long, please enter a valid phone number. ");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "phone number too long, please enter "
+                + "a valid phone number. ");
+
+        } else if (phoneNumber.length() < 10) {
+            log.info("phone number too short, please enter a valid phone number");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "phone number too short, please enter"
+                + " a valid phone number");
         }
 
-        if (!phoneNumber.matches("[0-9 ]*")) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Phone number must only contain digits and spaces");
-        } else if (phoneNumber.length() > 15) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Phone number can not contain more than 15 characters");
-        } else if (phoneNumber.length() < 9) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Phone number must contain at least 9 characters");
-        }
-
-        if (!dob.isBefore(LocalDate.now())) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Date of birth must be in the past");
-        } else if (dob.isBefore(LocalDate.parse("1900-01-01"))) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Date of birth must be later than 01/01/1900");
+        if(dob.isAfter(LocalDate.now())){
+            log.info("Date of birth needs to be in the past");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Date of birth needs to be in the "
+                + "past");
+        }else if (dob.isBefore(LocalDate.of(1900,01,01))){
+            log.info("Date of birth is before the lower bound, please correct. ");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Date of birth is before the lower "
+                + "bound, please correct.");
         }
     }
 }
