@@ -1,5 +1,6 @@
 package com.example.Work_Experience_Project.controllers;
 
+import java.time.Period;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.http.HttpStatus;
@@ -68,13 +69,7 @@ public class FormController {
     }
 
     public void getAge(LocalDate dob) {
-        LocalDate today = LocalDate.now();
-
-        if (today.getYear() == dob.getYear()) {
-            age = 0;
-        } else {
-            age = today.compareTo(dob);
-        }
+        age = Period.between(dob, LocalDate.now()).getYears();
     }
 
 
@@ -93,7 +88,7 @@ public class FormController {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Phone number must contain at least 9 characters");
         }
 
-        if (!dob.isBefore(LocalDate.now())) {
+        if (dob.isAfter(LocalDate.now())) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Date of birth must be in the past");
         } else if (dob.isBefore(LocalDate.parse("1900-01-01"))) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Date of birth must be later than 01/01/1900");
