@@ -17,6 +17,7 @@ import org.springframework.web.server.ResponseStatusException;
 @Controller
 public class MyErrorController implements ErrorController {
 
+    //Processes errors through the frontend so an error message can be displayed on screen instead of just in logs
     @RequestMapping("/error")
     public String handleError(Model model, HttpServletRequest request) {
         Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);

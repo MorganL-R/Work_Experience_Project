@@ -62,6 +62,13 @@ p{
     font-family: Segoe UI;
 }
 
+p2{
+    justify-content: center;
+    display: flex;
+    flex-wrap: nowrap;
+    font-size: x-large;
+}
+
 span.response-display {
     margin-left: 0px;
     color: black;
@@ -114,6 +121,14 @@ span.dateformat {
     font-size: large;
 }
 
+#error-container {
+    margin: auto;
+    border-radius: 25px;
+    background-color: #97c9f2;
+    padding: 20px;
+    width: 50%;
+}
+
 
 
 #name{
@@ -162,4 +177,23 @@ a:hover {
     color: #00000087;
     justify-content: center;
     display: flex;
+}
+
+span.error-display {
+    margin-left: 10px;
+    color: #af1313;
+}
+
+body{
+    background-color: #1976c2;
+}
+
+body {
+    font-family: Segoe UI;
+}
+
+h1 {
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap;
 }

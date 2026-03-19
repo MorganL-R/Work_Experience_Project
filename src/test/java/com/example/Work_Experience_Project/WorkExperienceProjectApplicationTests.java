@@ -8,20 +8,20 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.web.servlet.MockMvc;
-
+//MockMVC tests that allow us to run tests without running the whole application and manually testing
 @WebMvcTest(FormController.class)
 class WorkExperienceProjectApplicationTests {
 
   @Autowired
   private MockMvc mockMvc;
 
+  //Happy Path Test
   @Test
   void happyPathReturns200Response() throws Exception {
     mockMvc.perform(post("/submitForm")
         .param("name", "Joshua")
         .param("phoneNumber", "1234567890")
         .param("dob", "2008-11-13")).andExpect(status().is(200));
-
   }
 // Test for if name is 1 character
   @Test
@@ -56,6 +56,7 @@ class WorkExperienceProjectApplicationTests {
         .param("dob", "2008-11-13")).andExpect(status().is(500));
   }
 
+  //Test if dob is past the upper bound
   @Test
   void dobUpperBoundExceptionTest() throws Exception{
     mockMvc.perform(post("/submitForm")
@@ -63,7 +64,7 @@ class WorkExperienceProjectApplicationTests {
         .param("phoneNumber", "1234567890")
         .param("dob", "2077-11-13")).andExpect(status().is(500));
   }
-
+ //Test if dob is past lower bound
   @Test
   void dobLowerBoundExceptionTest() throws Exception{
     mockMvc.perform(post("/submitForm")
