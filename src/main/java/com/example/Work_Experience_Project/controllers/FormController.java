@@ -22,7 +22,7 @@ public class FormController {
 
     @GetMapping(value = {"/form"})
     protected String openForm(){
-        return "/submitForm";
+        return "/submitFomr";
     }
 
     @PostMapping(value = {"/submitForm"})
