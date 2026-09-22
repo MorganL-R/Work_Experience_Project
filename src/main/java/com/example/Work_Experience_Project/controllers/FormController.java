@@ -73,11 +73,14 @@ public class FormController {
 
     public void getAge(LocalDate dob) {
         LocalDate today = LocalDate.now();
+        age = today.getYear() - dob.getYear();
 
-        if (today.getYear() == dob.getYear()) {
-            age = 0;
-        } else {
-            age = today.compareTo(dob);
+        if (today.getMonthValue() < dob.getMonthValue()) {
+            age = age - 1;
+        } else if (today.getMonthValue() == dob.getMonthValue()) {
+            if (today.getDayOfMonth() < dob.getDayOfMonth()) {
+                age = age - 1;
+            }
         }
     }
 
