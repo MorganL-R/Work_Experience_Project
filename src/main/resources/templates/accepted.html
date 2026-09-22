@@ -1,38 +1,58 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link rel="stylesheet" href="css/styleSheet.css">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accepted</title>
-    <p> Accepted </p>
+    <link rel="stylesheet" href="temp/styleSheetAccepted.css">
 </head>
-
 <body>
 
-<form action="/accepted" method="POST">
-    <div>
-        <p>
-            Username:&nbsp;<span class="response-display" th:text=${username}></span>
+<main class="accepted-page">
+    <header class="page-heading">
+        <p class="eyebrow">Account Setup</p>
+        <h1>Registration Accepted</h1>
+        <p class="heading-text">Your account details have been received successfully.</p>
+    </header>
+
+    <section class="accepted-card" aria-labelledby="accepted-message">
+        <p id="accepted-message" class="success-message">
+            Your registration was successful.
         </p>
-        <p>
-            Email: <span class="response-display" th:text="${email}"></span>
-        </p>
-        <p>
-            Age:&nbsp;<span class="response-display" th:text=${age}></span>
-        </p>
-        <p>
-            Birthday:&nbsp;
-            <span>
-                <span class="response-display" th:text=${dob}></span>
-                <span id="dateformat" >(dd/mm/yyyy) </span>
-            </span>
-        </p>
-        <p>
-            Phone Number:&nbsp;<span class="response-display" th:text=${phoneNumber}></span>
-        </p>
-        <a href="/form" class="previous">&laquo; Previous</a>
-    </div>
-</form>
+
+        <div class="response-list">
+            <p class="response-row">
+                <span class="response-label">Username</span>
+                <span class="response-display" th:text="${username}">Username</span>
+            </p>
+
+            <p class="response-row">
+                <span class="response-label">Email</span>
+                <span class="response-display" th:text="${email}">Email address</span>
+            </p>
+
+            <p class="response-row">
+                <span class="response-label">Age</span>
+                <span class="response-display" th:text="${age}">Age</span>
+            </p>
+
+            <p class="response-row">
+                <span class="response-label">Birthday</span>
+                <span class="date-wrapper">
+                    <span class="response-display" th:text="${dob}">Date of birth</span>
+                    <span id="dateformat">(DD/MM/YYYY)</span>
+                </span>
+            </p>
+
+            <p class="response-row">
+                <span class="response-label">Phone Number</span>
+                <span class="response-display" th:text="${phoneNumber}">Phone number</span>
+            </p>
+        </div>
+    </section>
+
+    <a href="/form" class="previous-link">&larr; Previous</a>
+</main>
 
 </body>
 </html>

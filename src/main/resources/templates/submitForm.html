@@ -1,76 +1,74 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <link rel="stylesheet" href="css/styleSheet.css">
     <meta charset="UTF-8">
-    <title>Submit</title>
-    <p> Submit </p>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration</title>
+
+
+    <link rel="stylesheet" href="css/styleSheet.css">
 </head>
 <body>
 
+<main class="registration-page">
+    <header class="page-heading">
+        <p class="eyebrow">Account Setup</p>
+        <h1>User Registration</h1>
+        <p class="heading-text">Enter your details below to create your account.</p>
+    </header>
 
-<form action="/submitForm" method="post">
-    <span id="nameInput" class="border">
-
-            <group for="name"> Enter your Name:</group>
-
-
-
-
-
+    <form action="/submitForm" method="post">
+        <div class="form-group full-width">
+            <label for="nameField">Full Name</label>
             <input
                     type="text"
-                    id="name"
+                    id="nameField"
                     name="name"
-                    required
-                    minlength="2"
-                    maxlength="100"
-                    size="10" />
-        </span>
+                    placeholder="Enter your full name"
+                    autocomplete="name"
+                    required>
+        </div>
 
-    <span id="emailInput" class="border">
-
-                <group for="email"> Enter Email Address:</group>
-
+        <div class="form-row">
+            <div class="form-group">
+                <label for="emailField">Email Address</label>
                 <input
-                        type="text"
-                        id="email"
+                        type="email"
+                        id="emailField"
                         name="email"
-                        required
-                        minlenght="2"
-                        maxlenght="50"
-                        size="10" />
-    </span>
+                        placeholder="name@example.com"
+                        autocomplete="email"
+                        required>
+            </div>
 
-
-
-
-    <span id="phoneNumberInput" class="border">
-
-                <group for="phoneNumber"> Enter Phone Number:</group>
-                <br>
+            <div class="form-group">
+                <label for="phoneNumberField">Phone Number</label>
                 <input
-                        type="text"
-                        id="phoneNumber"
+                        type="tel"
+                        id="phoneNumberField"
                         name="phoneNumber"
-                        required
-                        minlength="10"
-                        maxlength="15"
-                        size="10" />
-            </span>
-    <br>
-    <span id="dobInput" class="border">
-            <group for="dob"> Enter your birthdate:</group>
-            <br>
-                <input
-                        type="date"
-                        name="dob"
-                        id="dob"/>
-            </span>
-    <br>
-    <br>
+                        placeholder="Enter your phone number"
+                        autocomplete="tel"
+                        required>
+            </div>
+        </div>
 
-    <span id="submitInput" class="border">
-                <input type="submit" value="Send Request" />
-         </span>
+        <div class="form-group full-width">
+            <label for="dobField">Date of Birth</label>
+            <input
+                    type="date"
+                    id="dobField"
+                    name="dob"
+                    autocomplete="bday"
+                    required>
+            <small>Date format: DD/MM/YYYY</small>
+        </div>
 
-</form>
+        <input type="submit" class="submit-button" value="Create Account">
+    </form>
+
+    <a href="#" class="previous-link">&larr; Previous</a>
+</main>
+
+</body>
+</html>
