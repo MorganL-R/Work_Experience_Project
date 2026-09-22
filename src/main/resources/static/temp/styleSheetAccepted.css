@@ -1,11 +1,197 @@
-body{
-    background-color: rgb(255 94 0 / 40%);
+:root {
+    --background-dark: #102f35;
+    --background-light: #789497;
+    --card: #f8fbfb;
+    --primary: #126d70;
+    --primary-dark: #084b4e;
+    --primary-soft: rgba(18, 109, 112, 0.14);
+    --text: #17383c;
+    --muted: #657b7e;
+    --border: #c6d5d6;
 }
 
-p{
-    justify-content: center;
+* {
+    box-sizing: border-box;
+}
+
+html {
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 48px 20px;
     display: flex;
-    flex-wrap: nowrap;
-    font-size: xx-large;
-    font-family: Segoe UI, cursive;
+    align-items: center;
+    justify-content: center;
+    background:
+            radial-gradient(circle at 10% 10%, rgba(255, 255, 255, 0.18), transparent 30%),
+            radial-gradient(circle at 90% 90%, rgba(0, 47, 50, 0.28), transparent 34%),
+            linear-gradient(135deg, var(--background-dark), var(--background-light));
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.accepted-page {
+    width: 100%;
+    max-width: 760px;
+}
+
+.page-heading {
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.eyebrow {
+    margin: 0 0 8px;
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+}
+
+.page-heading h1 {
+    margin: 0;
+    color: #ffffff;
+    font-size: clamp(2rem, 6vw, 2.8rem);
+    line-height: 1.15;
+    letter-spacing: -0.04em;
+    text-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.heading-text {
+    margin: 10px 0 0;
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 1rem;
+}
+
+.accepted-card {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    padding: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: 24px;
+    background: rgba(248, 251, 251, 0.96);
+    box-shadow: 0 28px 65px rgba(3, 29, 33, 0.3);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+}
+
+.accepted-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background: linear-gradient(90deg, var(--primary-dark), #48aaa5, var(--primary-dark));
+}
+
+.success-message {
+    margin-bottom: 28px;
+    padding: 18px 20px;
+    border: 1px solid rgba(18, 109, 112, 0.2);
+    border-radius: 12px;
+    background: var(--primary-soft);
+    color: var(--primary-dark);
+    font-size: 1rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.response-list {
+    display: grid;
+    gap: 16px;
+    margin: 0;
+}
+
+.response-row {
+    display: grid;
+    grid-template-columns: minmax(130px, 0.35fr) minmax(0, 1fr);
+    align-items: center;
+    gap: 18px;
+    min-height: 64px;
+    margin: 0;
+    padding: 14px 18px;
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    background: #ffffff;
+    box-shadow: 0 5px 13px rgba(18, 55, 59, 0.05);
+}
+
+.response-label {
+    color: var(--text);
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+.response-display {
+    min-width: 0;
+    color: var(--primary-dark);
+    font-size: 1rem;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+.date-wrapper {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+#dateformat {
+    color: var(--muted);
+    font-size: 0.82rem;
+    font-weight: 400;
+}
+
+.previous-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 46px;
+    margin-top: 20px;
+    padding: 10px 18px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 10px;
+    background: rgba(5, 41, 45, 0.42);
+    color: #ffffff;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.previous-link:hover {
+    background: rgba(5, 41, 45, 0.68);
+    transform: translateX(-2px);
+}
+
+.previous-link:focus-visible {
+    outline: 3px solid rgba(255, 255, 255, 0.8);
+    outline-offset: 3px;
+}
+
+@media (max-width: 650px) {
+    body {
+        padding: 28px 14px;
+        align-items: flex-start;
+    }
+
+    .accepted-card {
+        padding: 32px 22px;
+        border-radius: 18px;
+    }
+
+    .response-row {
+        grid-template-columns: 1fr;
+        gap: 5px;
+    }
+
+    .previous-link {
+        width: 100%;
+    }
 }
