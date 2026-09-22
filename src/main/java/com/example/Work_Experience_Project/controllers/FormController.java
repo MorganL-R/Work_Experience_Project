@@ -2,6 +2,7 @@ package com.example.Work_Experience_Project.controllers;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.boot.autoconfigure.graphql.GraphQlProperties;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,10 +30,11 @@ public class FormController {
     protected String processForm(Model model,
         @RequestParam String name,
         @RequestParam String phoneNumber,
+        @RequestParam String email,
         @RequestParam LocalDate dob) throws ResponseStatusException {
 
         try {
-            exceptionHandling(name, phoneNumber, dob);
+            exceptionHandling(name, phoneNumber, dob, email);
 
 
             getAge(dob);
@@ -43,6 +45,7 @@ public class FormController {
             model.addAttribute("age", age);
             model.addAttribute("dob", dob.format(DateTimeFormatter.ofPattern("dd / MM " + "/ yyyy")));
             model.addAttribute("phoneNumber", phoneNumber);
+            model.addAttribute("email", email);
 
             model.addAttribute("username", username);
             model.addAttribute("age", age);
@@ -50,6 +53,7 @@ public class FormController {
                 + "\n Request Output:"
                 + "\n   Name: " + name
                 + "\n   age: " + age
+                + "\n   email " + email
                 + "\n   Date of Birth: " + dob.format(DateTimeFormatter.ofPattern("dd/MM" + "/yyyy"))
                 + "\n   Phone Number: " + phoneNumber + "\n  Generated Username: " + username);
             return "/accepted";
@@ -69,16 +73,19 @@ public class FormController {
 
     public void getAge(LocalDate dob) {
         LocalDate today = LocalDate.now();
+        age = today.getYear() - dob.getYear();
 
-        if (today.getYear() == dob.getYear()) {
-            age = 0;
-        } else {
-            age = today.compareTo(dob);
+        if (today.getMonthValue() < dob.getMonthValue()) {
+            age = age - 1;
+        } else if (today.getMonthValue() == dob.getMonthValue()) {
+            if (today.getDayOfMonth() < dob.getDayOfMonth()) {
+                age = age - 1;
+            }
         }
     }
 
 
-    public void exceptionHandling(String name, String phoneNumber, LocalDate dob) throws ResponseStatusException {
+    public void exceptionHandling(String name, String phoneNumber, LocalDate dob, String email) throws ResponseStatusException {
         if (name.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Name can not be empty");
         }  else if (name.length() > 40) {
@@ -92,6 +99,18 @@ public class FormController {
         } else if (phoneNumber.length() < 9) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Phone number must contain at least 9 characters");
         }
+
+        if (email.isEmpty()) {
+            throw new ResponseStatusException(
+                    HttpStatus.INTERNAL_SERVER_ERROR,
+                    "Email can not be empty");
+        } else if (!email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$")) {
+            throw new ResponseStatusException(
+                    HttpStatus.INTERNAL_SERVER_ERROR,
+                    "Email format is invalid");
+        }
+
+
 
         if (!dob.isBefore(LocalDate.now())) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Date of birth must be in the past");
