@@ -1,15 +1,17 @@
 package com.example.Work_Experience_Project.controllers;
 
+import jakarta.validation.constraints.*;
 import com.example.Work_Experience_Project.models.Submissions;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.boot.autoconfigure.graphql.GraphQlProperties;
-import org.springframework.http.HttpStatus;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -17,7 +19,9 @@ import java.util.List;
 
 import com.example.Work_Experience_Project.services.FormService;
 import org.springframework.web.server.ResponseStatusException;
+import com.example.Work_Experience_Project.services.FormService;
 
+@Validated
 @Controller
 public class FormController {
 
@@ -40,13 +44,14 @@ public class FormController {
     @PostMapping("/submitForm")
     protected String processForm(
             Model model,
-            @RequestParam String name,
-            @RequestParam String phoneNumber,
-            @RequestParam String email,
-            @RequestParam LocalDate dob) {
+            @RequestParam @NotBlank @Size(max = 30) @Pattern(regexp = "^[A-Za-z]+$") String name,
+            @RequestParam @NotBlank @Pattern(regexp = "^\\d{10,15}$") String phoneNumber,
+            @RequestParam @NotBlank @Email String email,
+            @RequestParam @NotNull @Past @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dob) {
 
         formService.exceptionHandling(name, phoneNumber, dob, email);
 
+        formService.exceptionHandling(name, phoneNumber, dob, email);
         Integer age = formService.getAge(dob);
 
         String username = formService.customusername(dob, name);
