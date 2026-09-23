@@ -1,20 +1,21 @@
 package com.example.Work_Experience_Project.controllers;
 
+import jakarta.validation.constraints.Size;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.boot.autoconfigure.graphql.GraphQlProperties;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import jakarta.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import com.example.Work_Experience_Project.services.FormService;
-import org.springframework.web.server.ResponseStatusException;
 
+@Validated
 @Controller
 public class FormController {
 
@@ -34,10 +35,10 @@ public class FormController {
     @PostMapping("/submitForm")
     protected String processForm(
             Model model,
-            @RequestParam String name,
-            @RequestParam String phoneNumber,
-            @RequestParam String email,
-            @RequestParam LocalDate dob) {
+            @RequestParam @NotNull String name,
+            @RequestParam @NotNull @Size(max=10) String phoneNumber,
+            @RequestParam @NotNull String email,
+            @RequestParam @NotNull LocalDate dob) {
 
         formService.exceptionHandling(name, phoneNumber, dob, email);
 
