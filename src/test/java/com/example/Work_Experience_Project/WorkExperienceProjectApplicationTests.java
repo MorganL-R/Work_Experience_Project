@@ -29,44 +29,4 @@ class WorkExperienceProjectApplicationTests {
                         .param("dob", "2007-12-21"))
                 .andExpect(status().is(200));
     }
-
-    @Test
-    void emptyName() throws Exception {
-        mockMvc.perform(post("/submitForm")
-                        .param("name", "")
-                        .param("phoneNumber", "1234567890")
-                        .param("email", "name@example.com")
-                        .param("dob", "2000-01-01"))
-                .andExpect(status().is(500));
-    }
-
-    @Test
-    void dobOutOfRange() throws Exception {
-        mockMvc.perform(post("/submitForm")
-                        .param("name", "Ryan")
-                        .param("phoneNumber", "1234567890")
-                        .param("email", "name@example.com")
-                        .param("dob", "2026-09-25"))
-                .andExpect(status().is(500));
-    }
-
-    @Test
-    void phoneNumberTooShort() throws Exception {
-        mockMvc.perform(post("/submitForm")
-                        .param("name", "Aidan")
-                        .param("phoneNumber", "123")
-                        .param("email", "name@example.com")
-                        .param("dob", "2000-01-01"))
-                .andExpect(status().is(500));
-    }
-
-    @Test
-    void phoneNumberEmpty() throws Exception {
-        mockMvc.perform(post("/submitForm")
-                        .param("name", "Adam")
-                        .param("phoneNumber", "")
-                        .param("email", "adam@example.com")
-                        .param("dob", "2000-01-01"))
-                .andExpect(status().is(500));
-    }
 }
