@@ -2,10 +2,68 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/styleSheet.css">
+    <link rel="stylesheet" href="/css/adminStyleSheet.css">
     <title>Admin Review</title>
 </head>
 <body>
+
+<main class="admin-review">
+    <header>
+        Submission Portal
+    </header>
+
+    <section>
+        <h2>Search Submissions</h2>
+
+        <form>
+
+        <input
+                type="text"
+                name="search"
+                placeholder="Search by name, email or username">
+
+        <button type="submit">
+            Search
+        </button>
+
+        </form>
+
+    </section>
+
+    <div class="table-container">
+
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Username</th>
+            </tr>
+            </thead>
+
+            <tbody>
+
+            <tr th:each="submission : ${submissions}">
+                <td th:text="${submission.name}"></td>
+                <td th:text="${submission.age}"></td>
+                <td th:text="${submission.email}"></td>
+                <td th:text="${submission.phoneNumber}"></td>
+                <td th:text="${submission.username}"></td>
+            </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+    <section>
+        <a th:href="@{/form}" class="back-button">
+            Back to Form
+        </a>
+    </section>
+</main>
 
 </body>
 </html>
