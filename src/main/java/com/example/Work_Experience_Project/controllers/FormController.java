@@ -1,5 +1,6 @@
 package com.example.Work_Experience_Project.controllers;
 
+import com.example.Work_Experience_Project.models.Submissions;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.boot.autoconfigure.graphql.GraphQlProperties;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.example.Work_Experience_Project.services.FormService;
 import org.springframework.web.server.ResponseStatusException;
@@ -21,6 +24,9 @@ public class FormController {
     private static final Log log = LogFactory.getLog(FormController.class);
 
     private final FormService formService;
+
+    private static final List<Submissions> submissions =
+            new ArrayList<>();
 
     public FormController(FormService formService) {
         this.formService = formService;
@@ -52,6 +58,17 @@ public class FormController {
         model.addAttribute("email", email);
         model.addAttribute("username", username);
 
+        Submissions newSubmission =
+                new Submissions(
+                        name,
+                        email,
+                        phoneNumber,
+                        username,
+                        age
+                );
+
+        submissions.add(newSubmission);
+
         log.info("Request successfully processed"
                 + "\n Request Output:"
                 + "\n   Name: " + name
@@ -62,5 +79,9 @@ public class FormController {
                 + "\n  Generated Username: " + username);
 
         return "/accepted";
+    }
+
+    public static List<Submissions> getSubmissions() {
+        return submissions;
     }
 }

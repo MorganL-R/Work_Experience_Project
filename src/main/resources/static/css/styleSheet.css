@@ -227,4 +227,13 @@ small {
     .previous-link {
         width: 100%;
     }
+    .navigation-buttons {
+        display: flex;
+        gap: 12px;
+        margin-top: 20px;
+    }
+
+    .navigation-buttons .previous-link {
+        margin-top: 0;
+    }
 }

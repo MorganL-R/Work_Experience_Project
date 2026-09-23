@@ -67,7 +67,14 @@
         <input type="submit" class="submit-button" value="Create Account">
     </form>
 
-    <a href="#" class="previous-link">&larr; Previous</a>
+    <div class="navigation-buttons">
+
+        <a href="#" class="previous-link">&larr; Previous</a>
+
+        <a th:href="@{/admin}" class="previous-link">
+            View Admin Portal
+        </a>
+    </div>
 </main>
 
 </body>
