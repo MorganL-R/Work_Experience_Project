@@ -22,9 +22,7 @@ public class FormService {
 
         LocalDate today = LocalDate.now();
 
-        int age = Period.between(dob, today).getYears();
-
-        return age;
+        return Period.between(dob, today).getYears();
     }
 
     public void exceptionHandling(

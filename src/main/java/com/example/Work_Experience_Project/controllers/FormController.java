@@ -39,7 +39,7 @@ public class FormController {
             @RequestParam @NotBlank @Size(max = 30) @Pattern(regexp = "^[A-Za-z]+$") String name,
             @RequestParam @NotBlank @Pattern(regexp = "^\\d{10,15}$") String phoneNumber,
             @RequestParam @NotBlank @Email String email,
-            @RequestParam @NotNull @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dob) {
+            @RequestParam @NotNull @Past @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dob) {
 
 
         formService.exceptionHandling(name, phoneNumber, dob, email);
