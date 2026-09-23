@@ -22,9 +22,7 @@ public class FormService {
 
         LocalDate today = LocalDate.now();
 
-        int age = Period.between(dob, today).getYears();
-
-        return age;
+        return Period.between(dob, today).getYears();
     }
 
     public void exceptionHandling(
@@ -33,48 +31,7 @@ public class FormService {
             LocalDate dob,
             String email) {
 
-        if (name.isEmpty()) {
-            throw new ResponseStatusException(
-                    HttpStatus.INTERNAL_SERVER_ERROR,
-                    "Name can not be empty");
-        }
 
-        if (name.length() > 40) {
-            throw new ResponseStatusException(
-                    HttpStatus.INTERNAL_SERVER_ERROR,
-                    "Name contains too many characters");
-        }
-
-        if (!phoneNumber.matches("[0-9 ]*")) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
-            "Phone number must only contain digits and spac*s");
-        }
-
-        if (phoneNumber.length() > 15) {
-            throw new ResponseStatusException(
-                    HttpStatus.INTERNAL_SERVER_ERROR,
-                    "Phone number can not contain more than 15 characters");
-        }
-
-        if (phoneNumber.length() < 9) {
-            throw new ResponseStatusException(
-                    HttpStatus.INTERNAL_SERVER_ERROR,
-                    "Phone number must contain at least 9 characters");
-        }
-
-        if (email.isEmpty()) {
-            throw new ResponseStatusException(
-                    HttpStatus.INTERNAL_SERVER_ERROR,
-                    "Email can not be empty");
-        }
-
-        if (!email.matches(
-                "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$")) {
-
-            throw new ResponseStatusException(
-                    HttpStatus.INTERNAL_SERVER_ERROR,
-                    "Email format is invalid");
-        }
 
         if (!dob.isBefore(LocalDate.now())) {
             throw new ResponseStatusException(
@@ -82,10 +39,5 @@ public class FormService {
                     "Date of birth must be in the past");
         }
 
-        if (dob.isBefore(LocalDate.parse("1900-01-01"))) {
-            throw new ResponseStatusException(
-                    HttpStatus.INTERNAL_SERVER_ERROR,
-                    "Date of birth must be later than 01/01/1900");
-        }
     }
 }
