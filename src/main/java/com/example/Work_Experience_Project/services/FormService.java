@@ -41,10 +41,5 @@ public class FormService {
                     "Date of birth must be in the past");
         }
 
-        if (dob.isBefore(LocalDate.parse("1900-01-01"))) {
-            throw new ResponseStatusException(
-                    HttpStatus.INTERNAL_SERVER_ERROR,
-                    "Date of birth must be later than 01/01/1900");
-        }
     }
 }

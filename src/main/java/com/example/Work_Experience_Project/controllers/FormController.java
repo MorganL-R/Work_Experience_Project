@@ -3,6 +3,7 @@ package com.example.Work_Experience_Project.controllers;
 import jakarta.validation.constraints.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
@@ -38,7 +39,7 @@ public class FormController {
             @RequestParam @NotBlank @Size(max = 30) @Pattern(regexp = "^[A-Za-z]+$") String name,
             @RequestParam @NotBlank @Pattern(regexp = "^\\d{10,15}$") String phoneNumber,
             @RequestParam @NotBlank @Email String email,
-            @RequestParam @NotNull LocalDate dob) {
+            @RequestParam @NotNull @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dob) {
 
 
         formService.exceptionHandling(name, phoneNumber, dob, email);
