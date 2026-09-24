@@ -96,7 +96,7 @@ class WorkExperienceProjectApplicationTests {
                         .param("phoneNumber", "1234567890")
                         .param("email", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@test.com")
                         .param("dob", "2026-12-21"))
-                .andExpect(status().is(500));
+                .andExpect(status().is(400));
     }
 
     @Test
@@ -116,7 +116,7 @@ class WorkExperienceProjectApplicationTests {
                         .param("phoneNumber", "123456789000000")
                         .param("email", "name@example.com")
                         .param("dob", "2026-12-21"))
-                .andExpect(status().is(500));
+                .andExpect(status().is(400));
     }
 
     @Test

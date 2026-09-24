@@ -18,14 +18,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.Work_Experience_Project.services.FormService;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
-import com.example.Work_Experience_Project.services.FormService;
 
 @Validated
 @Controller
 public class FormController {
 
     private static final Log log = LogFactory.getLog(FormController.class);
+
+    private static final int MAX_AGE_YEARS = 125;
 
     private final FormService formService;
 
@@ -47,9 +49,13 @@ public class FormController {
             @RequestParam @NotBlank @Size(max = 30) @Pattern(regexp = "^[A-Za-z]+$") String name,
             @RequestParam @NotBlank @Pattern(regexp = "^\\d{10,15}$") String phoneNumber,
             @RequestParam @NotBlank @Email String email,
-            @RequestParam @NotNull @Past @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dob) {
+            @RequestParam @NotNull @Past @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dob) {
 
-        formService.exceptionHandling(name, phoneNumber, dob, email);
+        if (dob.isBefore(LocalDate.now().minusYears(MAX_AGE_YEARS))) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "Date of birth cannot be more than " + MAX_AGE_YEARS + " years ago");
+        }
 
         formService.exceptionHandling(name, phoneNumber, dob, email);
         Integer age = formService.getAge(dob);

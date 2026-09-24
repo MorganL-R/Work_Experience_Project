@@ -29,15 +29,6 @@ public class FormService {
             String name,
             String phoneNumber,
             LocalDate dob,
-            String email) {
-
-
-
-        if (!dob.isBefore(LocalDate.now())) {
-            throw new ResponseStatusException(
-                    HttpStatus.INTERNAL_SERVER_ERROR,
-                    "Date of birth must be in the past");
-        }
-
-    }
+            String email) {}
 }
+
