@@ -30,6 +30,106 @@ class WorkExperienceProjectApplicationTests {
                 .andExpect(status().is(200));
     }
 
+    @Test
+    void emptyDob() throws Exception {
+        mockMvc.perform(post("/submitForm")
+                        .param("name", "Kuba")
+                        .param("phoneNumber", "1234567890")
+                        .param("email", "name@example.com")
+                        .param("dob", ""))
+                .andExpect(status().is(400));
+    }
+
+    @Test
+    void upperBoundDob() throws Exception {
+        mockMvc.perform(post("/submitForm")
+                        .param("name", "Kuba")
+                        .param("phoneNumber", "1234567890")
+                        .param("email", "name@example.com")
+                        .param("dob", "1800-12-21"))
+                .andExpect(status().is(400));
+    }
+
+    @Test
+    void lowerBoundDob() throws Exception {
+        mockMvc.perform(post("/submitForm")
+                        .param("name", "Kuba")
+                        .param("phoneNumber", "1234567890")
+                        .param("email", "name@example.com")
+                        .param("dob", "2026-12-21"))
+                .andExpect(status().is(400));
+    }
+
+    @Test
+    void formattingDob() throws Exception {
+        mockMvc.perform(post("/submitForm")
+                        .param("name", "Kuba")
+                        .param("phoneNumber", "1234567890")
+                        .param("email", "name@example.com")
+                        .param("dob", "2026t12-21"))
+                .andExpect(status().is(400));
+    }
+    @Test
+    void emptyEmail() throws Exception {
+        mockMvc.perform(post("/submitForm")
+                        .param("name", "Kuba")
+                        .param("phoneNumber", "1234567890")
+                        .param("email", "")
+                        .param("dob", "2026-12-21"))
+                .andExpect(status().is(400));
+    }
+
+    @Test
+    void patternEmail() throws Exception {
+        mockMvc.perform(post("/submitForm")
+                        .param("name", "Kuba")
+                        .param("phoneNumber", "1234567890")
+                        .param("email", "@test.comewan")
+                        .param("dob", "2026-12-21"))
+                .andExpect(status().is(400));
+    }
+
+    @Test
+    void sizeEmail() throws Exception {
+        mockMvc.perform(post("/submitForm")
+                        .param("name", "Kuba")
+                        .param("phoneNumber", "1234567890")
+                        .param("email", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@test.com")
+                        .param("dob", "2026-12-21"))
+                .andExpect(status().is(400));
+    }
+
+    @Test
+    void emptyPhoneNum() throws Exception {
+        mockMvc.perform(post("/submitForm")
+                        .param("name", "Kuba")
+                        .param("phoneNumber", "")
+                        .param("email", "name@example.com")
+                        .param("dob", "2026-12-21"))
+                .andExpect(status().is(400));
+    }
+
+    @Test
+    void sizePhoneNum() throws Exception {
+        mockMvc.perform(post("/submitForm")
+                        .param("name", "Kuba")
+                        .param("phoneNumber", "123456789000000")
+                        .param("email", "name@example.com")
+                        .param("dob", "2026-12-21"))
+                .andExpect(status().is(400));
+    }
+
+    @Test
+    void alnumPhoneNum() throws Exception {
+        mockMvc.perform(post("/submitForm")
+                        .param("name", "Kuba")
+                        .param("phoneNumber", "12345t7890")
+                        .param("email", "name@example.com")
+                        .param("dob", "2026-12-21"))
+                .andExpect(status().is(400));
+    }
+}
+
 
     private void unhappyPath() throws Exception {
 
