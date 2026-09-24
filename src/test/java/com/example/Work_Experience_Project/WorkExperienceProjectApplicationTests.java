@@ -13,9 +13,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 class WorkExperienceProjectApplicationTests {
 
-    private static final String VALID_NAME = "Kuba";
+    private static final String VALID_NAME = "John";
     private static final String VALID_PHONE = "1234567890";
-    private static final String VALID_EMAIL = "name@example.com";
+    private static final String VALID_EMAIL = "johndoe@example.com";
     private static final String VALID_DOB = "2007-12-21";
 
     @Autowired
