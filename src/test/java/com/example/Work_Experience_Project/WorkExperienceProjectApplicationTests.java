@@ -20,8 +20,8 @@ class WorkExperienceProjectApplicationTests {
     @MockitoBean
     private FormService formService;
 
-    @Test
-    void happyPath() throws Exception {
+
+    private void happyPath() throws Exception {
         mockMvc.perform(post("/submitForm")
                         .param("name", "Kuba")
                         .param("phoneNumber", "1234567890")
@@ -29,4 +29,49 @@ class WorkExperienceProjectApplicationTests {
                         .param("dob", "2007-12-21"))
                 .andExpect(status().is(200));
     }
+
+
+    private void unhappyPath() throws Exception {
+
+        mockMvc.perform(post("/submitForm")
+                        .param("name", "Kuba123!")
+                        .param("phoneNumber", "1234567890")
+                        .param("email", "name@example.com")
+                        .param("dob", "2007-12-21"))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void invalidNameTests() throws Exception {
+
+        mockMvc.perform(post("/submitForm")
+                        .param("name", "Kuba123!")
+                        .param("phoneNumber", "1234567890")
+                        .param("email", "name@example.com")
+                        .param("dob", "2007-12-21"))
+                .andExpect(status().isBadRequest());
+    }
+
+
+    @Test
+    void multipleSubmissionsPerformanceTest() throws Exception {
+        for (int i = 0; i < 10; i++) {
+            happyPath();
+        }
+    }
+
+    @Test
+    void multipleMixedSubmissionsTest() throws Exception {
+
+        for (int i = 0; i < 8; i++) {
+            happyPath();
+        }
+
+        for (int i = 0; i < 2; i++) {
+            unhappyPath();
+        }
+
+    }
 }
+
+
